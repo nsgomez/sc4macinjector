@@ -17,6 +17,10 @@
 		52D350571FEEF12A00177E88 /* injector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = injector.hpp; sourceTree = "<group>"; };
 		52D350591FEEF12A00177E88 /* injectorPriv.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = injectorPriv.hpp; sourceTree = "<group>"; };
 		52D3505B1FEEF12A00177E88 /* injector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = injector.cpp; sourceTree = "<group>"; };
+		52D350631FEEF39700177E88 /* cIGZCOMLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cIGZCOMLibrary.h; sourceTree = "<group>"; };
+		52D350641FEEF3F700177E88 /* cIGZCOMDirector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cIGZCOMDirector.h; sourceTree = "<group>"; };
+		52D350651FEEF42800177E88 /* cIGZUnknown.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cIGZUnknown.h; sourceTree = "<group>"; };
+		52D350661FEEF46700177E88 /* cGZCOMLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cGZCOMLibrary.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +56,10 @@
 				52D350571FEEF12A00177E88 /* injector.hpp */,
 				52D350591FEEF12A00177E88 /* injectorPriv.hpp */,
 				52D3505B1FEEF12A00177E88 /* injector.cpp */,
+				52D350631FEEF39700177E88 /* cIGZCOMLibrary.h */,
+				52D350641FEEF3F700177E88 /* cIGZCOMDirector.h */,
+				52D350651FEEF42800177E88 /* cIGZUnknown.h */,
+				52D350661FEEF46700177E88 /* cGZCOMLibrary.h */,
 			);
 			path = injector;
 			sourceTree = "<group>";
@@ -215,12 +223,15 @@
 		52D350601FEEF12A00177E88 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -228,12 +239,14 @@
 		52D350611FEEF12A00177E88 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
