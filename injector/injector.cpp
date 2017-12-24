@@ -52,15 +52,11 @@ bool cGZCOMLibrary__Load(cGZCOMLibrary *self)
 {
     fprintf(stderr, "Inside the replacement cGZCOMLibrary loader!\n");
     if (!self->mbLoaded) {
-        // TODO: Convert string encoding of path
-        
         fprintf(stderr,
                 "Opening candidate library %s\n",
                 self->msLibraryPath.str);
         
-        // TODO: Replace string here with re-encoded path
         self->mHandle = dlopen(self->msLibraryPath.str, RTLD_NOW);
-        
         if (!self->mHandle) {
             fprintf(stderr, "%s\n", dlerror());
             return false;
