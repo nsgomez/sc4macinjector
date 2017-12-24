@@ -1,7 +1,28 @@
+/*
+   Project: libinjector, the library injector for SimCity 4 Mac
+   File: cGZCOMLibrary.h
+ 
+   Copyright (c) 2017 Nelson Gomez (simmaster07)
+ 
+   Licensed under the MIT License. A copy of the License is available in
+   LICENSE or at:
+ 
+       http://opensource.org/licenses/MIT
+ 
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+   THE SOFTWARE.
+*/
+
 #pragma once
 #include <stdint.h>
 #include "cIGZCOMDirector.h"
 #include "cIGZCOMLibrary.h"
+#include "cRZString.h"
 
 typedef void* GZLibraryHandle;
 class cIGZString;
@@ -49,6 +70,6 @@ public:
    bool             mbLoaded;       // Is the library currently loaded.
    uint32_t         mnRefCount;     // RefCount.
    cIGZCOMDirector* mpDirector;     // The interface used by GZCOM to manipulate the dll.
-   //cRZString        msLibraryPath;  // Full path to library file (e.g. Win32 DLL).
+   cRZString        msLibraryPath;  // Full path to library file (e.g. Win32 DLL).
    GZLibraryHandle  mHandle;        // Library (OS-level) handle.
 };

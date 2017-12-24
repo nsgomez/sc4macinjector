@@ -1,15 +1,27 @@
 /*
- *  injector.cpp
- *  injector
- *
- *  Created by Nelson Gomez on 12/23/17.
- *  Copyright © 2017 Nelson Gomez. All rights reserved.
- *
- */
+   Project: libinjector, the library injector for SimCity 4 Mac
+   File: injector.cpp
+ 
+   Copyright (c) 2017 Nelson Gomez (simmaster07)
+ 
+   Licensed under the MIT License. A copy of the License is available in
+   LICENSE or at:
+ 
+       http://opensource.org/licenses/MIT
+ 
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+   THE SOFTWARE.
+*/
 
 #include <dlfcn.h>
 #include <stdio.h>
 #include "cGZCOMLibrary.h"
+#include "cRZString.h"
 #include "incompat_msg.h"
 #include "rd_route.h"
 
@@ -42,8 +54,12 @@ bool cGZCOMLibrary__Load(cGZCOMLibrary *self)
     if (!self->mbLoaded) {
         // TODO: Convert string encoding of path
         
-        // TODO: Replace NULL with path
-        self->mHandle = dlopen(NULL, RTLD_NOW);
+        fprintf(stderr,
+                "Opening candidate library %s\n",
+                self->msLibraryPath.str);
+        
+        // TODO: Replace string here with re-encoded path
+        self->mHandle = dlopen(self->msLibraryPath.str, RTLD_NOW);
         
         if (!self->mHandle) {
             fprintf(stderr, "%s\n", dlerror());
@@ -57,8 +73,10 @@ bool cGZCOMLibrary__Load(cGZCOMLibrary *self)
         
         pfn = (FunctionTypeGD)dlsym(self->mHandle, kCOMDirectorFunctionName);
         if (!pfn) {
-            // TODO: Replace NULL with path
-            fprintf(stderr, "cGZCOMLibrary::Load: The function '%s()' was not found in library: \"%s\"\n", kCOMDirectorFunctionName, NULL);
+            fprintf(stderr,
+                    "cGZCOMLibrary::Load: The function '%s()' was not found in library: \"%s\"\n",
+                    kCOMDirectorFunctionName,
+                    self->msLibraryPath.str);
             
             cGZCOMLibrary__Free(self);
             return false;
@@ -66,8 +84,9 @@ bool cGZCOMLibrary__Load(cGZCOMLibrary *self)
         
         cIGZCOMDirector* const pCOMDirector = pfn();
         if (!pCOMDirector) {
-            // TODO: Replace NULL with path
-            fprintf(stderr, "cGZCOMLibrary::Load: Failed to acquire GZCOM director from library: \"%s\"\n", NULL);
+            fprintf(stderr,
+                    "cGZCOMLibrary::Load: Failed to acquire GZCOM director from library: \"%s\"\n",
+                    self->msLibraryPath.str);
             
             cGZCOMLibrary__Free(self);
             return false;
@@ -75,10 +94,10 @@ bool cGZCOMLibrary__Load(cGZCOMLibrary *self)
         
         self->mpDirector = pCOMDirector;
         
-        // TODO: Replace NULL with GZCOM and path, respectively
-        if (!pCOMDirector->InitializeCOM(GZCOM(), NULL)) {
-            // TODO: Replace NULL with path
-            fprintf(stderr, "cGZCOMLibrary::Load: GZCOM Director failed initialization in library: \"%s\"\n", NULL);
+        if (!pCOMDirector->InitializeCOM(GZCOM(), self->msLibraryPath)) {
+            fprintf(stderr,
+                    "cGZCOMLibrary::Load: GZCOM Director failed initialization in library: \"%s\"\n",
+                    self->msLibraryPath.str);
             
             cGZCOMLibrary__Free(self);
             return false;
@@ -91,7 +110,7 @@ bool cGZCOMLibrary__Load(cGZCOMLibrary *self)
 __attribute__((constructor))
 static void ctor(void)
 {
-    GZCOM = (cIGZCOM*(*)(void))rd_function_ptr_from_name(kszGZCOMFunc, NULL);
+    GZCOM = (cIGZCOM*(*)(void))rd_function_ptr_from_name(kszGZCOMFunc + 1, NULL);
     if (!GZCOM) {
         ShowErrorAlert("symbol GZCOM not found");
         return;

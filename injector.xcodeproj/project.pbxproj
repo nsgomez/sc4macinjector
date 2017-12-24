@@ -26,6 +26,8 @@
 		52D3506B1FEF5EF300177E88 /* incompat_msg.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = incompat_msg.mm; sourceTree = "<group>"; };
 		52D3506D1FEF628200177E88 /* incompat_msg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = incompat_msg.h; sourceTree = "<group>"; };
 		52D3506E1FEF68AB00177E88 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		52D350701FEF947C00177E88 /* cRZString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cRZString.h; sourceTree = "<group>"; };
+		52D350711FEF95FD00177E88 /* cIGZString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cIGZString.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,8 +65,10 @@
 				52D3505B1FEEF12A00177E88 /* injector.cpp */,
 				52D350631FEEF39700177E88 /* cIGZCOMLibrary.h */,
 				52D350641FEEF3F700177E88 /* cIGZCOMDirector.h */,
+				52D350711FEF95FD00177E88 /* cIGZString.h */,
 				52D350651FEEF42800177E88 /* cIGZUnknown.h */,
 				52D350661FEEF46700177E88 /* cGZCOMLibrary.h */,
+				52D350701FEF947C00177E88 /* cRZString.h */,
 				52D3506B1FEF5EF300177E88 /* incompat_msg.mm */,
 				52D3506D1FEF628200177E88 /* incompat_msg.h */,
 				52D350671FEF564700177E88 /* rd_route.c */,
