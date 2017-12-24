@@ -7,20 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		52D350581FEEF12A00177E88 /* injector.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 52D350571FEEF12A00177E88 /* injector.hpp */; };
-		52D3505A1FEEF12A00177E88 /* injectorPriv.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 52D350591FEEF12A00177E88 /* injectorPriv.hpp */; };
 		52D3505C1FEEF12A00177E88 /* injector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52D3505B1FEEF12A00177E88 /* injector.cpp */; };
+		52D350691FEF564700177E88 /* rd_route.c in Sources */ = {isa = PBXBuildFile; fileRef = 52D350671FEF564700177E88 /* rd_route.c */; };
+		52D3506A1FEF564700177E88 /* rd_route.h in Headers */ = {isa = PBXBuildFile; fileRef = 52D350681FEF564700177E88 /* rd_route.h */; };
+		52D3506C1FEF5EF300177E88 /* incompat_msg.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52D3506B1FEF5EF300177E88 /* incompat_msg.mm */; };
+		52D3506F1FEF68AC00177E88 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D3506E1FEF68AB00177E88 /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		52D350541FEEF12A00177E88 /* libinjector.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libinjector.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
-		52D350571FEEF12A00177E88 /* injector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = injector.hpp; sourceTree = "<group>"; };
-		52D350591FEEF12A00177E88 /* injectorPriv.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = injectorPriv.hpp; sourceTree = "<group>"; };
 		52D3505B1FEEF12A00177E88 /* injector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = injector.cpp; sourceTree = "<group>"; };
 		52D350631FEEF39700177E88 /* cIGZCOMLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cIGZCOMLibrary.h; sourceTree = "<group>"; };
 		52D350641FEEF3F700177E88 /* cIGZCOMDirector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cIGZCOMDirector.h; sourceTree = "<group>"; };
 		52D350651FEEF42800177E88 /* cIGZUnknown.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cIGZUnknown.h; sourceTree = "<group>"; };
 		52D350661FEEF46700177E88 /* cGZCOMLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cGZCOMLibrary.h; sourceTree = "<group>"; };
+		52D350671FEF564700177E88 /* rd_route.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rd_route.c; sourceTree = "<group>"; };
+		52D350681FEF564700177E88 /* rd_route.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rd_route.h; sourceTree = "<group>"; };
+		52D3506B1FEF5EF300177E88 /* incompat_msg.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = incompat_msg.mm; sourceTree = "<group>"; };
+		52D3506D1FEF628200177E88 /* incompat_msg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = incompat_msg.h; sourceTree = "<group>"; };
+		52D3506E1FEF68AB00177E88 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52D3506F1FEF68AC00177E88 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,6 +43,7 @@
 		52D3504B1FEEF12A00177E88 = {
 			isa = PBXGroup;
 			children = (
+				52D3506E1FEF68AB00177E88 /* Cocoa.framework */,
 				52D350561FEEF12A00177E88 /* injector */,
 				52D350551FEEF12A00177E88 /* Products */,
 			);
@@ -53,13 +60,15 @@
 		52D350561FEEF12A00177E88 /* injector */ = {
 			isa = PBXGroup;
 			children = (
-				52D350571FEEF12A00177E88 /* injector.hpp */,
-				52D350591FEEF12A00177E88 /* injectorPriv.hpp */,
 				52D3505B1FEEF12A00177E88 /* injector.cpp */,
 				52D350631FEEF39700177E88 /* cIGZCOMLibrary.h */,
 				52D350641FEEF3F700177E88 /* cIGZCOMDirector.h */,
 				52D350651FEEF42800177E88 /* cIGZUnknown.h */,
 				52D350661FEEF46700177E88 /* cGZCOMLibrary.h */,
+				52D3506B1FEF5EF300177E88 /* incompat_msg.mm */,
+				52D3506D1FEF628200177E88 /* incompat_msg.h */,
+				52D350671FEF564700177E88 /* rd_route.c */,
+				52D350681FEF564700177E88 /* rd_route.h */,
 			);
 			path = injector;
 			sourceTree = "<group>";
@@ -71,8 +80,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52D350581FEEF12A00177E88 /* injector.hpp in Headers */,
-				52D3505A1FEEF12A00177E88 /* injectorPriv.hpp in Headers */,
+				52D3506A1FEF564700177E88 /* rd_route.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +141,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				52D3505C1FEEF12A00177E88 /* injector.cpp in Sources */,
+				52D350691FEF564700177E88 /* rd_route.c in Sources */,
+				52D3506C1FEF5EF300177E88 /* incompat_msg.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
