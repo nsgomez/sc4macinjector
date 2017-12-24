@@ -1,5 +1,5 @@
 # SC4MacInjector :electric_plug:
-![Build Status](https://travis-ci.org/nsgomez/sc4macinjector.svg?branch=master)  
+[![Build Status](https://travis-ci.org/nsgomez/sc4macinjector.svg?branch=master)](https://travis-ci.org/nsgomez/sc4macinjector)  
 A plugin for enabling Macs to run plugins for SimCity 4.
 
 ## Requirements
