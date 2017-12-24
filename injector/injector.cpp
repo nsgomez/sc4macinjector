@@ -26,7 +26,7 @@ static void ctor(void)
     // rd_route ignores one leading underscore when searching for symbols,
     // so we'll also skip the first underscore in our symbol string.
     int ret = rd_route_byname(kszLoadTargetFunc + 1, NULL, (void *)cGZCOMLibrary__Load, NULL);
-    if (ret == 0) {
+    if (ret != 0) {
         ShowIncompatAlert();
     }
 }
