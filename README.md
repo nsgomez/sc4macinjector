@@ -20,6 +20,10 @@ Packaging is currently a work in progress. To use this plugin,
 
 ```
 cd "~/Library/Application Support/Steam/steamapps/common/SimCity 4 Deluxe/SimCity 4 Deluxe Edition.app/Contents/MacOS"
+
+# Steam users will need to perform this step ONCE:
+echo 24780 > steam_appid.txt
+
 DYLD_INSERT_LIBRARIES=~/Documents/SimCity 4/Plugins/libinjector.dylib "./Sim City 4 Deluxe Editionsub"
 ```
 
