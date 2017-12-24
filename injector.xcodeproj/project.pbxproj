@@ -12,6 +12,7 @@
 		52D3506A1FEF564700177E88 /* rd_route.h in Headers */ = {isa = PBXBuildFile; fileRef = 52D350681FEF564700177E88 /* rd_route.h */; };
 		52D3506C1FEF5EF300177E88 /* incompat_msg.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52D3506B1FEF5EF300177E88 /* incompat_msg.mm */; };
 		52D3506F1FEF68AC00177E88 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D3506E1FEF68AB00177E88 /* Cocoa.framework */; };
+		52D350741FEFA2BD00177E88 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 52D350731FEFA2BD00177E88 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,8 @@
 		52D3506E1FEF68AB00177E88 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		52D350701FEF947C00177E88 /* cRZString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cRZString.h; sourceTree = "<group>"; };
 		52D350711FEF95FD00177E88 /* cIGZString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cIGZString.h; sourceTree = "<group>"; };
+		52D350721FEFA29E00177E88 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		52D350731FEFA2BD00177E88 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +48,8 @@
 		52D3504B1FEEF12A00177E88 = {
 			isa = PBXGroup;
 			children = (
+				52D350731FEFA2BD00177E88 /* README.md */,
+				52D350721FEFA29E00177E88 /* LICENSE */,
 				52D3506E1FEF68AB00177E88 /* Cocoa.framework */,
 				52D350561FEEF12A00177E88 /* injector */,
 				52D350551FEEF12A00177E88 /* Products */,
@@ -146,6 +151,7 @@
 			files = (
 				52D3505C1FEEF12A00177E88 /* injector.cpp in Sources */,
 				52D350691FEF564700177E88 /* rd_route.c in Sources */,
+				52D350741FEFA2BD00177E88 /* README.md in Sources */,
 				52D3506C1FEF5EF300177E88 /* incompat_msg.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
