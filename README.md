@@ -3,10 +3,10 @@
 A plugin for enabling Macs to run plugins for SimCity 4.
 
 ## Requirements
-A digital release of SimCity 4 Deluxe/Rush Hour for Intel Macs (e.g. GOG, Steam, Origin).
-The Mac App Store release **will not work** as it is not Aspyr's port but a Wineskin wrapper.
-The PowerPC port is also incompatible, and since it is an unsupported platform it will not be
-implemented in the future.
+A digital release of SimCity 4 Deluxe/Rush Hour for Intel Macs (i.e. Steam and Origin). The
+Mac App Store release **will not work** as it is not Aspyr's port but a Wineskin wrapper. The
+PowerPC port is also incompatible, and since it is an unsupported platform this plugin will
+not be implemented for it in the future.
 
 ## Installation
 Either obtain a prebuilt .dylib file from the Releases tab or compile yourself, then copy to
