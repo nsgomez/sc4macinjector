@@ -31,6 +31,7 @@
 		52D350711FEF95FD00177E88 /* cIGZString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cIGZString.h; sourceTree = "<group>"; };
 		52D350721FEFA29E00177E88 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		52D350731FEFA2BD00177E88 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		52D350751FEFA67600177E88 /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +49,7 @@
 		52D3504B1FEEF12A00177E88 = {
 			isa = PBXGroup;
 			children = (
+				52D350751FEFA67600177E88 /* .travis.yml */,
 				52D350731FEFA2BD00177E88 /* README.md */,
 				52D350721FEFA29E00177E88 /* LICENSE */,
 				52D3506E1FEF68AB00177E88 /* Cocoa.framework */,
