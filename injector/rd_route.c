@@ -165,6 +165,11 @@ int rd_duplicate_function(void *function, void **duplicate)
 	return KERN_SUCCESS;
 }
 
+void* rd_function_ptr_from_name(const char *function_name, const char *suggested_image_name)
+{
+    return _function_ptr_from_name(function_name, suggested_image_name);
+}
+
 
 static kern_return_t _remap_image(void *image, mach_vm_size_t image_slide, mach_vm_address_t *new_location)
 {

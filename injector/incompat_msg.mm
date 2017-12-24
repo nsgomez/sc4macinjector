@@ -22,12 +22,16 @@
 #import <Foundation/Foundation.h>
 #include "incompat_msg.h"
 
-void ShowIncompatAlert(void)
+void ShowErrorAlert(const char *pszCause)
 {
+    NSString *msg = [NSString stringWithFormat:@"%@ (error: %s)",
+                     @"Any .so plugins present will not be loaded. Please see https://github.com/nsgomez/wiki/Reporting-Issues to learn how you can report this issue.",
+                     pszCause];
+    
     NSAlert *alert = [[NSAlert alloc] init];
     [alert addButtonWithTitle:@"OK"];
     [alert setMessageText:@"Could not load libinjector for SC4."];
-    [alert setInformativeText:@"Any .so plugins present will not be loaded. Please see https://github.com/nsgomez/wiki/Reporting-Issues to learn how you can report this issue. (error: symbol not found)"];
+    [alert setInformativeText:msg];
     [alert setAlertStyle:NSCriticalAlertStyle];
     [alert runModal];
 }

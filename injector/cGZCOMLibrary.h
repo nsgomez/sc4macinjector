@@ -45,7 +45,7 @@ public:
    bool operator>  (const cGZCOMLibrary& rhs) const;
    bool operator== (const cGZCOMLibrary& rhs) const;
 
-protected:
+public:
    bool             mbLoaded;       // Is the library currently loaded.
    uint32_t         mnRefCount;     // RefCount.
    cIGZCOMDirector* mpDirector;     // The interface used by GZCOM to manipulate the dll.

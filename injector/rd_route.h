@@ -50,6 +50,8 @@ int rd_route_byname(const char *function_name, const char *image_name, void *rep
  */
 int rd_duplicate_function(void *function, void **duplicate);
 
+void* rd_function_ptr_from_name(const char *function_name, const char *suggested_image_name);
+
 #ifdef __cplusplus
 	}
 #endif

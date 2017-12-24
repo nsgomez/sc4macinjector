@@ -21,6 +21,6 @@
 #ifndef incompat_msg_h
 #define incompat_msg_h
 
-void ShowIncompatAlert(void);
+void ShowErrorAlert(const char *pszCause);
 
 #endif /* incompat_msg_h */
