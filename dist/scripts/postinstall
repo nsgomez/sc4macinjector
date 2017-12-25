@@ -1,0 +1,146 @@
+#!/bin/bash
+set -euf -o pipefail
+
+BASEDIR="/tmp/sc4macinjector"
+STEAMDIR="$HOME/Library/Application Support/Steam"
+
+FOUND_STEAM=0
+FOUND_APPSTORE=0
+FOUND_CUSTOM=0
+
+# Unbelievably enough, macOS' installer freaks out if you try to return a code
+# from a function despite seemingly violating Bash conventions. Return codes
+# from our helper functions need to be stored here instead.
+ERRCODE=0
+
+# The launcher shim always uses this directory even for the Mac App Store version
+PLUGINSDIR="$HOME/Documents/SimCity 4/Plugins"
+mkdir -p "$PLUGINSDIR"
+
+if [ ! -f "$BASEDIR/libinjector.dylib" ]; then
+	echo "Cannot copy injector library to plugins directory"
+	exit 2
+fi
+
+cp "$BASEDIR/libinjector.dylib" "$PLUGINSDIR/libinjector.dylib"
+
+substitute_exec() {
+	APPDIR="$1"
+	ORIGEXEC="$2"
+
+	if [ ! -f "$BASEDIR/launcher.sh" ]; then
+		echo "Cannot copy launcher shim to SC4 directory at $APPDIR"
+		exit 1
+	fi
+
+	# Make sure that repeated installations with this package don't wipe out the original executable.
+	EXECTYPE=$(file "$ORIGEXEC")
+	if [[ "$EXECTYPE" == *"Mach-O executable"* ]]; then
+		mv "$ORIGEXEC" "$APPDIR/SimCity 4 Deluxe Editionsub2"
+	else
+		echo "Not re-shimming $ORIGEXEC, appears to not be a Mach-O but a $EXECTYPE instead"
+	fi
+
+	cp "$BASEDIR/launcher.sh" "$ORIGEXEC"
+}
+
+try_steam_library_dir() {
+	LIBDIR="$1"
+	MANIFEST="$LIBDIR/steamapps/appmanifest_24780.acf"
+	if [ -f "$MANIFEST" ]; then
+		INSTDIR=$(perl -ne 'print "$2\n" if /"installdir"( |\t)+\"(.+?)\"/' "$MANIFEST")
+		if [ -z "$INSTDIR" ]; then
+			echo "Tried probing $LIBDIR for manifest but $MANIFEST produced empty installation directory $INSTDIR"
+			ERRCODE=2
+		fi
+
+		INSTDIR="$LIBDIR/steamapps/common/$INSTDIR"
+		if [ ! -d $INSTDIR ]; then
+			echo "Manifest for SC4 Steam found but $INSTDIR does not exist"
+			ERRCODE=3
+		fi
+
+		APPDIR="$INSTDIR/Sim City 4 Deluxe Edition.app/Contents/MacOS"
+		ORIGEXEC="$APPDIR/Sim City 4 Deluxe Editionsub"
+
+		if [ ! -f "$ORIGEXEC" ]; then
+			echo "Manifest for SC4 Steam found but could not find executable $ORIGEXEC"
+			ERRCODE=4
+		fi
+
+		substitute_exec "$APPDIR" "$ORIGEXEC"
+		echo "Substituted Steam executable at $APPDIR"
+		ERRCODE=0
+	else
+		echo "Tried probing $LIBDIR for manifest but $MANIFEST was not found"
+		ERRCODE=1
+	fi
+}
+
+if [ -d "$STEAMDIR" ]; then
+	try_steam_library_dir "$STEAMDIR"
+	if [[ $ERRCODE -ne 0 ]]; then
+		echo "$STEAMDIR/config/config.vdf"
+		LIBDIRS=$(perl -ne 'print "$2\n" if /"BaseInstallFolder_\d+"( |\t)+\"(.+?)\"/' "$STEAMDIR/config/config.vdf")
+		while read -r line; do
+			try_steam_library_dir "$line"
+			if [[ $ERRCODE -eq 0 ]]; then
+				FOUND_STEAM=1
+				break
+			fi
+		done <<< "$LIBDIRS"
+	else
+		FOUND_STEAM=1
+	fi
+else
+	echo "Could not find Steam support library at $STEAMDIR"
+fi
+
+APPSTOREDIR="/Applications/Sim City 4 Deluxe Edition.app/Contents/MacOS"
+ORIGEXEC="$APPSTOREDIR/Sim City 4 Deluxe Editionsub"
+
+if [ -f "$ORIGEXEC" ]; then
+	substitute_exec "$APPSTOREDIR" "$ORIGEXEC"
+	echo "Substituted executable for Mac App Store"
+	FOUND_APPSTORE=1
+else
+	echo "Mac App Store version not found at $ORIGEXEC"
+fi
+
+WANT_CUSTOM=""
+
+if [[ $FOUND_STEAM -eq 1 ]] || [[ $FOUND_APPSTORE -eq 1 ]]; then
+	WANT_CUSTOM=$(osascript -e 'set question to display dialog "SC4MacInjector automatically patched a Steam and/or Mac App Store installation of SimCity 4. Would you like to patch another custom installation?" buttons {"Yes", "No"} default button 2 with title "SC4MacInjector Installer"
+set answer to button returned of question
+return answer')
+
+else
+	WANT_CUSTOM=$(osascript -e 'set question to display dialog "SC4MacInjector could not find a Steam or App Store copy of SimCity 4. Would you like to manually locate the installation?" buttons {"Yes", "No"} default button 1 with title "SC4MacInjector Installer" with icon caution
+set answer to button returned of question
+return answer')
+
+fi
+
+if [[ "$WANT_CUSTOM" == "Yes" ]]; then
+	CUSTOMEXEC=$(osascript -e 'set filePath to choose file with prompt "Please locate \"SimCity 4 Deluxe Editionsub\":" invisibles true
+return POSIX path of filePath') || true
+
+	if [[ $? -eq 0 ]] && [[ ! -z "$CUSTOMEXEC" ]] && [[ -f "$CUSTOMEXEC" ]]; then
+		EXECTYPE=$(file "$CUSTOMEXEC")
+		if [[ "$EXECTYPE" == *"Mach-O executable"* ]]; then
+			EXECDIR=$(dirname "$CUSTOMEXEC")
+			substitute_exec "$EXECDIR" "$CUSTOMEXEC"
+			FOUND_CUSTOM=1
+		else
+			echo "Custom installation given but file $CUSTOMEXEC is not a Mach-O executable, got $EXECTYPE"
+		fi
+	fi
+fi
+
+if [[ $FOUND_STEAM -eq 0 ]] && [[ $FOUND_APPSTORE -eq 0 ]] && [[ $FOUND_CUSTOM -eq 0 ]]; then
+	osascript -e 'display dialog "SC4MacInjector could not find any installations of SimCity 4." buttons "OK" default button 1 with title "SC4MacInjector Installer" with icon stop'
+	echo "Could not find path for any installations"
+	exit 3
+fi
+
+exit 0

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="1">
+    <title>SC4MacInjector</title>
+    <readme file="readme.rtf" />
+    <license file="license.txt" />
+    <conclusion file="conclusion.rtf" />
+
+    <options customize="never" />
+    <choices-outline>
+        <line choice="install"/>
+    </choices-outline>
+    <choice id="install" visible="true" title="Install" description="Sets up your SimCity 4 installation(s) to support library-based (.so) mods.">
+        <pkg-ref id="me.ngomez.sc4.MacInjector.install.pkg">#me.ngomez.sc4.MacInjector.install.pkg</pkg-ref>
+    </choice>
+</installer-gui-script>
