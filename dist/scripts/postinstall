@@ -24,6 +24,11 @@ fi
 
 cp "$BASEDIR/libinjector.dylib" "$PLUGINSDIR/libinjector.dylib"
 
+# Needed for the App Store version. Because it's an App Store app, Gatekeeper
+# on versions of macOS that contain it will kill the game if it detects unsigned
+# code being injected.
+sudo codesign -f -s - "$HOME/Documents/SimCity 4/Plugins/libinjector.dylib"
+
 substitute_exec() {
 	APPDIR="$1"
 	ORIGEXEC="$2"
@@ -36,7 +41,7 @@ substitute_exec() {
 	# Make sure that repeated installations with this package don't wipe out the original executable.
 	EXECTYPE=$(file "$ORIGEXEC")
 	if [[ "$EXECTYPE" == *"Mach-O executable"* ]]; then
-		mv "$ORIGEXEC" "$APPDIR/SimCity 4 Deluxe Editionsub2"
+		mv "$ORIGEXEC" "$APPDIR/Sim City 4 Deluxe Editionsub2"
 	else
 		echo "Not re-shimming $ORIGEXEC, appears to not be a Mach-O but a $EXECTYPE instead"
 	fi
