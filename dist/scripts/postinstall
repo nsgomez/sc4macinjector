@@ -22,7 +22,7 @@ if [ ! -f "$BASEDIR/libinjector.dylib" ]; then
 	exit 2
 fi
 
-cp "$BASEDIR/libinjector.dylib" "$PLUGINSDIR/libinjector.dylib"
+cp -f "$BASEDIR/libinjector.dylib" "$PLUGINSDIR/libinjector.dylib"
 
 # Needed for the App Store version. Because it's an App Store app, Gatekeeper
 # on versions of macOS that contain it will kill the game if it detects unsigned
@@ -105,6 +105,13 @@ APPSTOREDIR="/Applications/Sim City 4 Deluxe Edition.app/Contents/MacOS"
 ORIGEXEC="$APPSTOREDIR/Sim City 4 Deluxe Editionsub"
 
 if [ -f "$ORIGEXEC" ]; then
+	# The App Store version is sandboxed, meaning that it cannot interact at all with
+	# the normal system hierarchy. Need to link our plugin to the sandboxed plugins
+	# directory.
+	SANDBOX="$HOME/Library/Containers/com.aspyr.simcity4.appstore/Data/Documents/SimCity 4/Plugins/"
+	mkdir -p "$SANDBOX"
+	cp -f "$BASEDIR/libinjector.dylib" "$SANDBOX/libinjector.dylib"
+
 	substitute_exec "$APPSTOREDIR" "$ORIGEXEC"
 	echo "Substituted executable for Mac App Store"
 	FOUND_APPSTORE=1

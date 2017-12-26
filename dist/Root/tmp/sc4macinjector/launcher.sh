@@ -10,4 +10,4 @@ echo >> "$LOGPATH"
 env >> "$LOGPATH"
 echo >> "$LOGPATH"
 
-"$CURDIR/Sim City 4 Deluxe Editionsub2" "$@" >> "$LOGPATH" 2>&1
+"$CURDIR/Sim City 4 Deluxe Editionsub2" "$@" >> "$LOGPATH" 2>&1 &
