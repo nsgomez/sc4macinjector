@@ -1,5 +1,10 @@
 #!/bin/bash
-export DYLD_INSERT_LIBRARIES="$HOME/Documents/SimCity 4/Plugins/libinjector.dylib"
+LIBS="$HOME/Documents/SimCity 4/Plugins/libinjector.dylib"
+if [ ! -z "$DYLD_INSERT_LIBRARIES" ]; then
+	LIBS="$LIBS:$DYLD_INSERT_LIBRARIES"
+fi
+
+export DYLD_INSERT_LIBRARIES="$LIBS"
 CURDIR=$(dirname "$0")
 
 mkdir -p "$HOME/Documents/SimCity 4"
